@@ -1,0 +1,32 @@
+<script>
+  const playBtn = document.getElementById('playBtn');
+  const loginForm = document.getElementById('loginForm');
+  const form = loginForm.querySelector('form');
+
+  // Check if user is already saved
+  const savedUser = localStorage.getItem('user');
+  if (savedUser) {
+    // Auto-redirect to games.html
+    window.location.href = "games.html";
+  }
+
+  // Show form when Play is clicked
+  playBtn.addEventListener('click', () => {
+    loginForm.classList.toggle('hidden');
+  });
+
+  // Handle login form submission
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = form.querySelector('input[type="text"]').value;
+    const pass = form.querySelector('input[type="password"]').value;
+
+    if (name && pass) {
+      // Save user info (NOT secure, but fine for prototype)
+      localStorage.setItem('user', JSON.stringify({ name, pass }));
+
+      // Redirect to games.html
+      window.location.href = "games.html";
+    }
+  });
+</script>
